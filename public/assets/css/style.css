@@ -502,3 +502,8 @@ dialog.modal::backdrop { background: rgba(26,26,26,.6); backdrop-filter: blur(3p
 html, body { overflow-x: clip; }
 .nav:not(.open) { visibility: hidden; }
 @media (min-width: 961px) { .nav:not(.open) { visibility: visible; } }
+
+/* Sélecteur de maquette (temporaire, pour la présentation au client) */
+.switch { position: fixed; left: 20px; bottom: 20px; z-index: 60; background: var(--ink); color: var(--white); font-family: var(--font-title); font-size: .78rem; padding: 10px 16px; border-radius: 999px; display: flex; gap: 10px; box-shadow: 0 10px 30px rgba(0,0,0,.25); }
+.switch a { color: #FF5A6E; font-weight: 700; }
+@media (max-width: 640px) { .switch { left: 10px; right: 10px; bottom: 10px; justify-content: center; } }
