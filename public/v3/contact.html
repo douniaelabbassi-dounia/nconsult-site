@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact — N-CONSULT (Maquette C)</title>
+<meta name="description" content="N-CONSULT — cabinet marocain de conseil, formation et accompagnement en Achats et Supply Chain.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#C8102E">
+<link rel="icon" type="image/png" href="../favicon.png">
+<link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/v3.css">
+</head>
+<body>
+<header class="header">
+  <div class="container">
+    <a class="brand" href="index.html" aria-label="N-CONSULT — Accueil"><img src="../assets/img/logo.jpg" alt="" width="46" height="46">N-CONSULT</a>
+    <button class="burger" aria-label="Menu" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button>
+    <nav class="nav" id="nav" aria-label="Navigation principale">
+      <a href="index.html">Accueil</a>
+      <a href="a-propos.html">À propos</a>
+      <a href="conseil.html">Conseil</a>
+      <a href="formation.html">Formation</a>
+      <a href="accompagnement.html">Accompagnement</a>
+      <a class="btn btn--red" href="contact.html">Contact<span class="i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+    </nav>
+  </div>
+</header>
+<main>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="box">
+      <div>
+        <div class="crumb"><a href="index.html">Accueil</a><span>/</span>Contact</div>
+        <span class="pill-label">Contact</span>
+        <h1 class="reveal">Votre enjeu mérite une <span class="hl">réponse concrète.</span></h1>
+        <p class="lead reveal d1">Un projet ? Une problématique Achat ? Une formation ? Parlons-en.</p>
+      </div>
+      <div class="visual reveal d1"><div class="arch"><img src="../v2/img/bureaux.jpg" alt=""></div><span class="dot"></span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container contact">
+    <div class="coord reveal">
+      <div><small>E-mail</small><a href="mailto:contact@nconsultsolutions.com">contact@nconsultsolutions.com</a></div>
+      <div><small>Téléphone</small><span>+212 X XX XX XX XX</span></div>
+      <div><small>Adresse</small><span>Casablanca, Maroc</span></div>
+      <div><small>LinkedIn</small><a href="https://www.linkedin.com/" target="_blank" rel="noopener">N-CONSULT</a></div>
+    </div>
+    <form class="form reveal d1" id="contact-form" data-to="contact@nconsultsolutions.com" novalidate>
+      <div class="field"><label for="nom">Nom et prénom *</label><input id="nom" name="nom" required autocomplete="name"></div>
+      <div class="field"><label for="societe">Société</label><input id="societe" name="societe" autocomplete="organization"></div>
+      <div class="field"><label for="email">E-mail *</label><input id="email" name="email" type="email" required autocomplete="email"></div>
+      <div class="field"><label for="tel">Téléphone</label><input id="tel" name="tel" type="tel" autocomplete="tel"></div>
+      <div class="field full"><label for="objet">Objet *</label>
+        <select id="objet" name="objet" required>
+          <option value="devis">Demander un devis</option>
+          <option value="diagnostic">Demander un diagnostic Achats</option>
+          <option value="formation">Formation / Académie</option>
+          <option value="accompagnement">Accompagnement individuel</option>
+          <option value="rappel">Être rappelé</option>
+          <option value="autre">Autre demande</option>
+        </select>
+      </div>
+      <div class="field full"><label for="message">Message *</label><textarea id="message" name="message" required></textarea></div>
+      <label class="consent"><input type="checkbox" required> J’accepte que mes données soient utilisées pour traiter ma demande.</label>
+      <div><button class="btn btn--red" type="submit">Envoyer ma demande<span class="i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button></div>
+      <p class="form-status" id="form-status" role="status"></p>
+    </form>
+  </div>
+</section>
+</main>
+<footer class="footer">
+  <div class="container">
+    <div class="box">
+      <div class="footer-top">
+        <div>
+          <a class="brand" href="index.html"><img src="../assets/img/logo.jpg" alt="" width="46" height="46">N-CONSULT</a>
+          <p class="about">Cabinet marocain indépendant de conseil, de formation et d’accompagnement en Achats, Supply Chain, Logistique et Excellence Opérationnelle.</p>
+        </div>
+        <div><h4>Le cabinet</h4><ul><li><a href="a-propos.html">À propos</a></li><li><a href="a-propos.html#valeurs">Nos valeurs</a></li><li><a href="index.html#references">Références</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+        <div><h4>Prestations</h4><ul><li><a href="conseil.html">Conseil</a></li><li><a href="formation.html">Académie</a></li><li><a href="accompagnement.html">Accompagnement</a></li></ul></div>
+        <div><h4>Contact</h4><ul><li><a href="mailto:contact@nconsultsolutions.com">contact@nconsultsolutions.com</a></li><li>+212 X XX XX XX XX</li><li>Casablanca, Maroc</li><li><a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a></li></ul></div>
+      </div>
+      <div class="wordmark" aria-hidden="true">n<span>•</span>consult</div>
+      <div class="footer-bottom"><span>© <span id="year">2026</span> N-CONSULT SOLUTIONS</span><span>Conseil • Formation • Accompagnement</span></div>
+    </div>
+  </div>
+</footer>
+<div class="switch">Maquette C <a href="../contact.html">A</a><a href="../v2/contact.html">B</a></div>
+<script src="../assets/js/main.js" defer></script>
+</body>
+</html>
