@@ -58,6 +58,52 @@
     Array.prototype.slice.call(track.children, track.children.length / 2).forEach(function (c) { c.setAttribute('aria-hidden', 'true'); });
   });
 
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Diaporama du bandeau d'accueil
+  document.querySelectorAll('[data-slideshow]').forEach(function (box) {
+    var slides = box.querySelectorAll('.slide');
+    var dots = document.querySelectorAll('.slide-dots button');
+    var cap = document.querySelector('.slide-dots .cap');
+    var i = 0, timer;
+    function show(n) {
+      slides[i].classList.remove('on'); if (dots[i]) dots[i].classList.remove('on');
+      i = (n + slides.length) % slides.length;
+      slides[i].classList.add('on'); if (dots[i]) dots[i].classList.add('on');
+      if (cap) cap.textContent = slides[i].getAttribute('data-cap') || '';
+    }
+    function start() { clearInterval(timer); if (!reduced) timer = setInterval(function () { show(i + 1); }, 5000); }
+    dots.forEach(function (d, n) { d.addEventListener('click', function () { show(n); start(); }); });
+    show(0); start();
+  });
+
+  // Logos et publications tournants (« Ils nous font confiance »)
+  document.querySelectorAll('[data-rotator]').forEach(function (rot, k) {
+    var items = rot.children, name = rot.parentNode.querySelector('.rot-name'), i = 0;
+    function show(n) {
+      items[i].classList.remove('on');
+      i = n % items.length;
+      items[i].classList.add('on');
+      if (name) name.textContent = items[i].getAttribute('data-name') || '';
+    }
+    show(0);
+    if (!reduced && items.length > 1) setTimeout(function () { setInterval(function () { show(i + 1); }, 3200); }, k * 700);
+  });
+
+  // Visionneuse des publications
+  var lb = document.getElementById('lightbox');
+  if (lb) {
+    document.addEventListener('click', function (e) {
+      var t = e.target.closest('[data-lightbox]');
+      if (!t) return;
+      lb.querySelector('img').src = t.getAttribute('data-lightbox');
+      lb.querySelector('img').alt = t.getAttribute('data-name') || '';
+      lb.showModal();
+    });
+    lb.querySelector('.modal-close').addEventListener('click', function () { lb.close(); });
+    lb.addEventListener('click', function (e) { if (e.target === lb) lb.close(); });
+  }
+
   // Année du pied de page
   var y = document.getElementById('year');
   if (y) y.textContent = new Date().getFullYear();
