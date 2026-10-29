@@ -104,6 +104,37 @@
     lb.addEventListener('click', function (e) { if (e.target === lb) lb.close(); });
   }
 
+  // Page Livrables : onglets par domaine et fiche détaillée
+  var livTabs = document.querySelectorAll('.liv-tab');
+  livTabs.forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      livTabs.forEach(function (t) { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
+      tab.classList.add('active'); tab.setAttribute('aria-selected', 'true');
+      document.querySelectorAll('.liv-panel').forEach(function (p) { p.hidden = p.getAttribute('data-panel') !== tab.getAttribute('data-tab'); });
+    });
+  });
+  var livModal = document.getElementById('liv-modal');
+  if (livModal) {
+    var openLiv = function (card) {
+      var panel = card.closest('.liv-panel');
+      var tab = document.querySelector('.liv-tab[data-tab="' + panel.getAttribute('data-panel') + '"]');
+      var titre = card.querySelector('h3').textContent;
+      livModal.querySelector('[data-l="domaine"]').textContent = tab ? tab.textContent : '';
+      livModal.querySelector('[data-l="titre"]').textContent = titre;
+      livModal.querySelector('[data-l="resume"]').textContent = card.querySelector('p').textContent;
+      livModal.querySelector('[data-l="detail"]').innerHTML = card.querySelector('.liv-detail').innerHTML;
+      livModal.querySelector('[data-l="cta"]').href = 'contact.html?objet=devis&livrable=' + encodeURIComponent(titre);
+      livModal.showModal();
+    };
+    document.addEventListener('click', function (e) { var c = e.target.closest('.liv-card'); if (c) openLiv(c); });
+    document.addEventListener('keydown', function (e) {
+      var c = e.target.closest && e.target.closest('.liv-card');
+      if (c && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); openLiv(c); }
+    });
+    livModal.querySelector('.modal-close').addEventListener('click', function () { livModal.close(); });
+    livModal.addEventListener('click', function (e) { if (e.target === livModal) livModal.close(); });
+  }
+
   // Année du pied de page
   var y = document.getElementById('year');
   if (y) y.textContent = new Date().getFullYear();
@@ -183,6 +214,7 @@
     var objet = params.get('objet');
     if (objet && form.objet.querySelector('option[value="' + objet + '"]')) form.objet.value = objet;
     if (params.get('sujet')) form.message.value = 'Bonjour,\n\nJe souhaite recevoir le programme détaillé de la formation « ' + params.get('sujet') + ' ».\n\n';
+    if (params.get('livrable')) form.message.value = 'Bonjour,\n\nJe souhaite échanger sur le livrable « ' + params.get('livrable') + ' » pour mon organisation.\n\n';
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
