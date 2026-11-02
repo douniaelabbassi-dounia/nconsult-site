@@ -742,3 +742,15 @@ dialog.lightbox .modal-close { position: fixed; right: 20px; top: 20px; backgrou
   .nav a { padding: 10px 8px; font-size: .84rem; }
   .nav .btn { padding: 12px 14px; font-size: .78rem; }
 }
+
+/* Sélecteur de langue */
+.lang { display: inline-flex; gap: 2px; margin-left: 4px; padding-left: 16px; border-left: 1px solid #3a3a3d; font-family: var(--font-title); font-weight: 700; font-size: .76rem; }
+.lang a { padding: 3px 7px; border-radius: 5px; color: #BDBEC2; }
+.lang a:hover { color: var(--white); }
+.lang a.on { background: var(--red); color: var(--white); }
+@media (max-width: 640px) {
+  .topbar .topbar-links > a { display: none; }
+  .topbar .container > span:first-child { font-size: .72rem; }
+  .lang { border-left: 0; padding-left: 0; margin-left: 0; }
+  .topbar .topbar-links .lang a { display: inline-block; }
+}

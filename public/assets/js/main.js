@@ -1,6 +1,7 @@
 /* N-CONSULT SOLUTIONS — interactions du site */
 (function () {
   document.documentElement.classList.add('js');
+  var EN = document.documentElement.lang === 'en';
 
   // En-tête : ombre au défilement
   var header = document.querySelector('.header');
@@ -142,7 +143,9 @@
   // ---------- Catalogue Académie ----------
   var grid = document.getElementById('catalog');
   if (grid && window.FORMATIONS) {
-    var LABELS = { junior: 'Niveau 1 · Junior', intermediaire: 'Niveau 2 · Intermédiaire', senior: 'Niveau 3 · Senior' };
+    var LABELS = EN
+      ? { junior: 'Level 1 · Junior', intermediaire: 'Level 2 · Intermediate', senior: 'Level 3 · Senior' }
+      : { junior: 'Niveau 1 · Junior', intermediaire: 'Niveau 2 · Intermédiaire', senior: 'Niveau 3 · Senior' };
     var data = window.FORMATIONS;
     var current = 'all';
     var input = document.getElementById('search');
@@ -166,7 +169,7 @@
         return '<article class="card course" tabindex="0" role="button" data-i="' + f.i + '">' +
           '<span class="lvl lvl--' + f.niveau + '">' + LABELS[f.niveau] + '</span>' +
           '<h3>' + esc(f.titre) + '</h3><p>' + esc(f.intro) + '</p>' +
-          '<span class="link-arrow">Voir la fiche <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>' +
+          '<span class="link-arrow">' + (EN ? 'View details' : 'Voir la fiche') + ' <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>' +
           '</article>';
       }).join('');
       if (empty) empty.style.display = list.length ? 'none' : 'block';
@@ -213,26 +216,32 @@
     var params = new URLSearchParams(location.search);
     var objet = params.get('objet');
     if (objet && form.objet.querySelector('option[value="' + objet + '"]')) form.objet.value = objet;
-    if (params.get('sujet')) form.message.value = 'Bonjour,\n\nJe souhaite recevoir le programme détaillé de la formation « ' + params.get('sujet') + ' ».\n\n';
-    if (params.get('livrable')) form.message.value = 'Bonjour,\n\nJe souhaite échanger sur le livrable « ' + params.get('livrable') + ' » pour mon organisation.\n\n';
+    if (params.get('sujet')) form.message.value = EN
+      ? 'Hello,\n\nI would like to receive the detailed programme of the course “' + params.get('sujet') + '”.\n\n'
+      : 'Bonjour,\n\nJe souhaite recevoir le programme détaillé de la formation « ' + params.get('sujet') + ' ».\n\n';
+    if (params.get('livrable')) form.message.value = EN
+      ? 'Hello,\n\nI would like to discuss the deliverable “' + params.get('livrable') + '” for my organisation.\n\n'
+      : 'Bonjour,\n\nJe souhaite échanger sur le livrable « ' + params.get('livrable') + ' » pour mon organisation.\n\n';
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var status = document.getElementById('form-status');
       if (!form.checkValidity()) { form.reportValidity(); return; }
       var to = form.getAttribute('data-to');
-      var subject = '[Site web] ' + form.objet.options[form.objet.selectedIndex].text + ' — ' + form.nom.value;
+      var subject = (EN ? '[Website] ' : '[Site web] ') + form.objet.options[form.objet.selectedIndex].text + ' — ' + form.nom.value;
       var body = [
-        'Nom : ' + form.nom.value,
-        'Société : ' + (form.societe.value || '-'),
-        'E-mail : ' + form.email.value,
-        'Téléphone : ' + (form.tel.value || '-'),
-        'Objet : ' + form.objet.options[form.objet.selectedIndex].text,
+        (EN ? 'Name: ' : 'Nom : ') + form.nom.value,
+        (EN ? 'Company: ' : 'Société : ') + (form.societe.value || '-'),
+        (EN ? 'Email: ' : 'E-mail : ') + form.email.value,
+        (EN ? 'Phone: ' : 'Téléphone : ') + (form.tel.value || '-'),
+        (EN ? 'Subject: ' : 'Objet : ') + form.objet.options[form.objet.selectedIndex].text,
         '',
         form.message.value
       ].join('\n');
       window.location.href = 'mailto:' + to + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-      status.textContent = 'Votre messagerie va s’ouvrir avec votre demande pré-remplie. Merci, nous vous répondrons rapidement.';
+      status.textContent = EN
+        ? 'Your email app will open with your request filled in. Thank you, we will reply shortly.'
+        : 'Votre messagerie va s’ouvrir avec votre demande pré-remplie. Merci, nous vous répondrons rapidement.';
     });
   }
 })();
